@@ -11,6 +11,7 @@ import { API_URL } from "@/config/index";
 import styles from "@/styles/Form.module.css";
 import Layout from "@/components/Layout";
 import Modal from "@/components/Modal";
+import ImageUpload from "@/components/ImageUpload";
 
 export default function EditEventPage({ evt }) {
   const [values, setValues] = useState({
@@ -65,9 +66,16 @@ export default function EditEventPage({ evt }) {
     setValues({ ...values, [name]: value });
   };
 
+  const imageUploaded = async () => {
+    const res = await fetch(`${API_URL}/events/${evt.id}`);
+    const data = await res.json();
+    setImagePreview(data.image.formats.thumbnail.url);
+    setShowModal(false);
+  };
+
   return (
     <Layout title="Add New Events">
-      <Link href="/events">Go Back</Link>
+      <Link href="/events">{"< Go Back"}</Link>
       <h1>Edit Event</h1>
 
       <ToastContainer />
@@ -156,7 +164,7 @@ export default function EditEventPage({ evt }) {
 
       <h2>Event Image</h2>
       {imagePreview ? (
-        <Image src={imagePreview} height={100} width={170} />
+        <Image src={imagePreview} height={100} width={170} alt="Event Image" />
       ) : (
         <div>
           <p>No image uploaded</p>
@@ -170,7 +178,7 @@ export default function EditEventPage({ evt }) {
       </div>
 
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        IMAGE UPLOAD
+        <ImageUpload evtId={evt.id} imageUploaded={imageUploaded} />
       </Modal>
     </Layout>
   );

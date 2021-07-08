@@ -8,8 +8,8 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
-        <Head />
+      <Html lang="en">
+        <Head/>
         <body>
           <Main />
           <NextScript />
