@@ -7,6 +7,7 @@ import { FaPencilAlt, FaTimes } from "react-icons/fa";
 import styles from "@/styles/Event.module.css";
 import Layout from "@/components/Layout";
 import { API_URL } from "@/config/index";
+import moment from "moment";
 
 export default function EventPage({ evt }) {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function EventPage({ evt }) {
         </div>
 
         <span>
-          {new Date(evt.date).toLocaleDateString("uz-UZ")} at {evt.time}
+          {moment(evt.date).format("DD/MM/yyyy")} at {evt.time}
         </span>
         <h1>{evt.name}</h1>
         <ToastContainer />
