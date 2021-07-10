@@ -15,6 +15,7 @@ export default function EventItem({ evt }) {
           }
           width={170}
           height={100}
+          alt="Event thubmnail"
         />
       </div>
       <div className={styles.info}>
